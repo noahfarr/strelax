@@ -1,8 +1,10 @@
-from strelax.environments import brax, gymnax
+from strelax.environments import ale, brax, gymnasium, gymnax
 
 register = {
     "gymnax": gymnax.make,
     "brax": brax.make,
+    "gymnasium": gymnasium.make,
+    "ale": ale.make,
 }
 
 
