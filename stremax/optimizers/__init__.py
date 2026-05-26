@@ -6,4 +6,5 @@ from .intentional import (
 )
 from .obgd import ObGD, ObGDConfig, ObGDState
 from .optimizer import Optimizer
+from .tidbd import TIDBD, TIDBDConfig, TIDBDState
 from .wrappers import OptaxOptimizer, OptaxOptimizerState, inject_logger
