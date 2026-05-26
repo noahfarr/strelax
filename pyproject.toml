@@ -18,6 +18,10 @@ dependencies = [
     "brax>=0.10.0",
 ]
 
+[project.optional-dependencies]
+gymnasium = ["gymnasium"]
+ale       = ["ale-py[gymnasium]"]
+
 
 [tool.uv.sources]
 lox = { git = "https://github.com/huterguier/lox" }

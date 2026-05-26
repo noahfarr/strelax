@@ -1,16 +1,10 @@
-from typing import Protocol, runtime_checkable
+from typing import Callable, Protocol, TypeVar
 
 from strelax.utils.typing import Array, PyTree
 
+State = TypeVar("State")
 
-@runtime_checkable
-class Optimizer(Protocol):
-    def init(self, parameters: PyTree, num_envs: int) -> PyTree: ...
 
-    def update(
-        self,
-        state: PyTree,
-        gradient: PyTree,
-        trace: PyTree,
-        td_error: Array,
-    ) -> tuple[PyTree, PyTree]: ...
+class Optimizer(Protocol[State]):
+    init: Callable[[PyTree, int], State]
+    update: Callable[[State, PyTree, PyTree, Array], tuple[PyTree, State]]

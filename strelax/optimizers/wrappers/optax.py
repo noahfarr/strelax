@@ -34,13 +34,15 @@ class OptaxOptimizer:
         self,
         state: OptaxOptimizerState,
         gradient: PyTree,
-        trace: PyTree,
-        td_error: Array,
+        trace: PyTree | None = None,
+        td_error: Array | None = None,
     ) -> tuple[PyTree, OptaxOptimizerState]:
-        del gradient
-        grad = jax.tree.map(
-            lambda leaf: -(broadcast(td_error, leaf) * leaf).mean(axis=0), trace
-        )
+        if trace is None:
+            grad = gradient
+        else:
+            grad = jax.tree.map(
+                lambda leaf: -(broadcast(td_error, leaf) * leaf).mean(axis=0), trace
+            )
         updates, opt_state = self.tx.update(grad, state.opt_state)
         lox.log({f"{self.name}/update_norm": optax.global_norm(updates)})
         return updates, OptaxOptimizerState(opt_state=opt_state)

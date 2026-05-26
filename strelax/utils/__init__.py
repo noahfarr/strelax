@@ -7,6 +7,7 @@ from lox.stripping import strip_jaxpr
 from lox.utils import flatten as _lox_flatten
 from lox.utils import is_hashable
 
+from .td_error_scaler import RunningStats, TDErrorScalerState
 from .timestep import Timestep
 from .transition import Transition
 
